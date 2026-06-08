@@ -3,6 +3,7 @@ import 'package:ge01_crud_front/config/session_manager.dart';
 import 'package:ge01_crud_front/providers/client_provider.dart';
 import 'package:ge01_crud_front/providers/login_provider.dart';
 import 'package:ge01_crud_front/providers/user_provider.dart';
+import 'package:ge01_crud_front/screens/add_client_screen.dart';
 import 'package:ge01_crud_front/screens/home_screen.dart';
 import 'package:ge01_crud_front/screens/login_screen.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'login': (_) => LoginScreen(),
           'home': (_) => HomeScreen(),
+          'addUser': (_) => AddClientScreen()
         },
         initialRoute: 'login',
       ),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:ge01_crud_front/config/session_manager.dart';
 import 'package:ge01_crud_front/constants.dart';
@@ -13,8 +14,8 @@ class ClientProvider with ChangeNotifier{
     getClients();
   }
 
-  getClients() async {
-    final urlClientsGet = Uri.http(urlApi + ":" + clientPort.toString(), '/api/clients'); 
+  Future getClients() async {
+    final urlClientsGet = Uri.http('$urlApi:$clientPort', '/api/clients'); 
     final resp = await http.get(urlClientsGet, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -32,5 +33,17 @@ class ClientProvider with ChangeNotifier{
     } else {
       throw Exception('Failed to fetch clients: ${resp.statusCode} - ${resp.body}');
     }
+  }
+
+  Future insertClient(Map<String, dynamic> body) async {
+    final urlClientsGet = Uri.http('$urlApi:$clientPort', '/api/clients'); 
+    await http.post(urlClientsGet, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SessionManager.authToken}',
+    },
+    body: jsonEncode(body),
+    );
+    notifyListeners();
   }
 }

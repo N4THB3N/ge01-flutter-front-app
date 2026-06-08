@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final clientProvider = Provider.of<ClientProvider>(context);
+    clientProvider.getClients();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your action here
+          Navigator.pushReplacementNamed(context, 'addUser');
         },
         backgroundColor: Colors.deepPurple,
         child: Icon(Icons.add, color: Colors.white),
