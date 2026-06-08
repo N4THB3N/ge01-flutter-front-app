@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final clientProvider = Provider.of<ClientProvider>(context);
-    clientProvider.getClients();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
