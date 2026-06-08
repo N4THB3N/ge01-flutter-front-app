@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:ge01_crud_front/config/session_manager.dart';
+import 'package:ge01_crud_front/providers/login_provider.dart';
 import 'package:ge01_crud_front/widgets/input_decoration.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +38,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   SingleChildScrollView loginForm(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -50,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: emailController,
                           validator: (value){
                                   return EmailValidator.validate(value.toString())
                                   ? null
@@ -66,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 30),
                         TextFormField(
+                          controller: passwordController,
                           validator: (value){
                                   return (value != null && value.length >= 6)
                                   ? null
@@ -85,8 +106,14 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           disabledColor: Colors.grey,
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, 'home');
+                          onPressed: () async {
+                            final email = emailController.text;
+                            final password = passwordController.text;
+                            await loginProvider.login(email, password);
+                            if (SessionManager.authToken != null && SessionManager.authToken!.isNotEmpty) {
+                              Navigator.pushReplacementNamed(context, 'home');
+                            }
+                            // Navigator.pushReplacementNamed(context, 'home');
                           },
                           color: Colors.deepPurple,
                           child: Container(
