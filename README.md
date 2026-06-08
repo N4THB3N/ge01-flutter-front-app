@@ -1,17 +1,20 @@
 # ge01_crud_front
 
-A new Flutter project.
+Este proyecto contiene las operaciones CRUD para el manejo básico de clientes. 
 
-## Getting Started
+## Iniciando con el proyecto
 
-This project is a starting point for a Flutter application.
+Este proyecto fue compilado con la versión 3.12.1 de Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+## Ejecutando el proyecto
+1. Instalar y configurar el aplicativo Android Studio.
+   Link de descarga: https://developer.android.com/studio?hl=es-419
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+2. Descargar y configurar un emulador de dispositivo Android:
+  https://developer.android.com/studio/run/managing-avds?hl=es-419
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Cambiar la variable apiUrl en el archivo constants.dart con la IP de tu máquina
+<img width="250" height="80" alt="image" src="https://github.com/user-attachments/assets/c5e93c88-6cb8-458d-9be4-ddef63e377e1" />
+
+4. Ejecutar el proyecto desde Visual Studio Code.
+
