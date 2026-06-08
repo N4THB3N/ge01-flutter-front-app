@@ -46,4 +46,14 @@ class ClientProvider with ChangeNotifier{
     );
     notifyListeners();
   }
+
+  Future deleteClient(int id) async {
+    final urlClientsGet = Uri.http('$urlApi:$clientPort', '/api/clients/$id');
+    await http.delete(urlClientsGet, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SessionManager.authToken}',
+    });  
+    notifyListeners();  
+  }
 }

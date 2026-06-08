@@ -56,7 +56,7 @@ class _AddClientScreenState extends State<AddClientScreen> {
     }
   }
 
-  void _save() {
+  Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
 
     final clientData = {
@@ -72,9 +72,10 @@ class _AddClientScreenState extends State<AddClientScreen> {
     };
 
     final clientProvider = Provider.of<ClientProvider>(context, listen: false);
-    clientProvider.insertClient(clientData);
+    await clientProvider.insertClient(clientData);
+    await clientProvider.getClients();
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cliente listo para guardar')));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Cliente guardado')));
     Navigator.pushReplacementNamed(context, 'home');
   }
 

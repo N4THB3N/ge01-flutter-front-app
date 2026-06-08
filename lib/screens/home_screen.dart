@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:ge01_crud_front/providers/client_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ClientProvider>(context, listen: false).getClients();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +39,23 @@ class HomeScreen extends StatelessWidget {
               child: ListTile( 
               title: Text('${client.firstName} ${client.lastName}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               subtitle: Text(client.email),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.edit, color: Colors.deepPurple),
+                    onPressed: () {
+                      // TODO: implement edit action
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete, color: Colors.deepPurple),
+                    onPressed: () {
+                      clientProvider.deleteClient(client.id);Provider.of<ClientProvider>(context, listen: false).getClients();
+                    },
+                  ),
+                ],
+              ),
             )));
         },
         
